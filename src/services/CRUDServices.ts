@@ -21,7 +21,3 @@ export function addNewPost(post: PostType) {
 export function deletePostById(id: number) {
     return http.delete(`/posts/${id}`)
 }
-
-export function updatePostById(id: number, updatedItem: {}) {
-    return http.put(`/posts/${id}/`, updatedItem)
-}
