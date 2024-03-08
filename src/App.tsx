@@ -3,7 +3,7 @@ import './App.css';
 import { getAllPosts } from './services/CRUDServices'
 import PostCard from './components/PostCard';
 import { PostType } from '../types/interfaces';
-import Example from './components/Modal';
+import Modal from './components/Modal';
 import { CreatePostForm } from './containers/CreatePostForm';
 import Pagination from './components/Pagination';
 
@@ -11,7 +11,7 @@ import Pagination from './components/Pagination';
 function App() {
   const [pageItem, setPageItem] = useState({
     start: 0,
-    end: 10
+    end: 9
   })
   const [postData, setPostData] = useState<PostType[]>([]);
   const [openModal, setOpenModal] = useState(false);
@@ -27,9 +27,9 @@ function App() {
 
   return (
     <div className="p-8  ">
-      <Example open={openModal} setOpen={setOpenModal}>
+      <Modal open={openModal} setOpen={setOpenModal}>
         <CreatePostForm />
-      </Example>
+      </Modal>
       <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={() => setOpenModal(true)}> add new post</button>
 
       <div className="flex flex-wrap justify-center gap-4">

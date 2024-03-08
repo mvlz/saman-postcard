@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { PaginationPropTypes } from "../../types/interfaces";
+import { PaginationPropsType } from "../../types/interfaces";
 
-export default function Pagination({ totalItems = 100, setPageItem }: PaginationPropTypes) {
+export default function Pagination({ totalItems = 100, setPageItem }: PaginationPropsType) {
     const [postPerPage, SetPostPerPage] = useState(9);
     const [currentPage, SetCurrentPage] = useState(1);
 
@@ -70,17 +70,6 @@ export default function Pagination({ totalItems = 100, setPageItem }: Pagination
             const sliced = numOfButtons.slice(numOfButtons.length - 4);
             // slice(10-4)
             tempNumberOfButtons = [1, dotsLeft, ...sliced];
-        } else if (currentPage === dotsInitial) {
-            // [1, 2, 3, 4, "...", 10].length = 6 - 3  = 3
-            // arrOfCurrButtons[3] = 4 + 1 = 5
-            // or
-            // [1, 2, 3, 4, 5, "...", 10].length = 7 - 3 = 4
-            // [1, 2, 3, 4, 5, "...", 10][4] = 5 + 1 = 6
-            SetCurrentPage(arrOfCurrButtons[arrOfCurrButtons.length - 3] + 1);
-        } else if (currentPage === dotsRight) {
-            SetCurrentPage(arrOfCurrButtons[3] + 2);
-        } else if (currentPage === dotsLeft) {
-            SetCurrentPage(arrOfCurrButtons[3] - 2);
         }
 
         setArrOfCurrButtons(tempNumberOfButtons);
@@ -89,7 +78,6 @@ export default function Pagination({ totalItems = 100, setPageItem }: Pagination
         onPageChangeEvent(value - postPerPage, value);
     }, [currentPage, postPerPage, numOfPages]);
 
-    console.log(numOfPages);
     return (
         <div className="flex items-center justify-center  border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
             <ul className="flex items-center justify-center mb-0 border p-2 rounded">
@@ -107,18 +95,18 @@ export default function Pagination({ totalItems = 100, setPageItem }: Pagination
                         Prev
                     </a>
                 </li>
-                {arrOfCurrButtons.map((data, index) => {
+                {arrOfCurrButtons.map((currentBtn, index) => {
                     return (
                         <li
                             key={index}
-                            className={`text-xs dt-item inline-block cursor-pointer text-center ${currentPage === data ? "active" : ""
+                            className={`text-xs dt-item inline-block cursor-pointer text-center ${currentPage === currentBtn ? "active" : ""
                                 }`}
                         >
                             <a
                                 className="dt-link  inline-block  ml-0 border text-gray-800 cursor-pointer text-center rounded-lg"
-                                onClick={() => SetCurrentPage(data)}
+                                onClick={() => typeof currentBtn === 'number' ? SetCurrentPage(currentBtn) : null}
                             >
-                                {data}
+                                {currentBtn}
                             </a>
                         </li>
                     );

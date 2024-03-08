@@ -1,10 +1,11 @@
 
 
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XCircleIcon } from '@heroicons/react/24/outline'
+import { ModalPropsType } from '../../types/interfaces'
 
-export default function Example(props) {
+export default function Modal(props: ModalPropsType) {
   const { open, setOpen, children } = props
   const cancelButtonRef = useRef(null)
 
